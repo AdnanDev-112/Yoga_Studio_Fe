@@ -1,6 +1,9 @@
 "use client"
 import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+import { Link } from 'react-router-dom';
+
+
 
 
 export default function AdminDashboard() {
@@ -22,7 +25,7 @@ export default function AdminDashboard() {
           {/* Activites aka Classes/Workshop */}
           <div className="bg-white rounded-lg shadow p-4">
             <h2 className="text-xl font-semibold mb-4">Activities</h2>
-            <p>Manage and schedule new Activities (classes and workshops).</p>
+            <p>Manage and schedule new Activities (classes and workshops)</p>
             <div className="text-right mt-2">
               <a href="#" className="text-blue-500 hover:text-blue-700">Manage</a>
             </div>
@@ -31,9 +34,9 @@ export default function AdminDashboard() {
           {/* Course */}
           <div className="bg-white rounded-lg shadow p-4">
             <h2 className="text-xl font-semibold mb-4">Courses</h2>
-            <p>Manage courses.</p>
+            <p>Manage courses</p>
             <div className="text-right mt-2">
-              <a href="#" className="text-blue-500 hover:text-blue-700">Manage</a>
+              <a href="/Admin/Courses" className="text-blue-500 hover:text-blue-700">Manage</a>
             </div>
           </div>
 
@@ -42,7 +45,7 @@ export default function AdminDashboard() {
             <h2 className="text-xl font-semibold mb-4">User Management</h2>
             <p>View and manage user registrations and bookings.</p>
             <div className="text-right mt-2">
-              <a href="#" className="text-blue-500 hover:text-blue-700">View Users</a>
+              <a href="#" className="text-blue-500 hover:text-blue-700">View Users</a> 
             </div>
           </div>
 
