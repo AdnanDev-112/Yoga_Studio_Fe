@@ -14,6 +14,7 @@ export default function manageCourses() {
     endDate: "",
     numberOfClasses: "",
     price: "",
+    pricingID: "",
   });
 
   const handleChange = (e) => {
@@ -36,6 +37,7 @@ export default function manageCourses() {
       endDate: "",
       numberOfClasses: "",
       price: "",
+      pricingID: ""
     });
   };
 
@@ -47,7 +49,7 @@ export default function manageCourses() {
     justifyContent: 'center',
     height: '70vh',
     // background CSS properties
-    backgroundImage: 'url(https://www.stockvault.net/data/2017/07/21/237499/preview16.jpg)', // Replace 'path/to/your/image.jpg' with the actual path to your image
+    backgroundImage: 'url(https://media.istockphoto.com/id/1310338394/photo/yoga-in-the-mountains.jpg?s=612x612&w=0&k=20&c=VAjYG0hUakFn8nySwsdMBf_4KFZVFi6B3l_zw0WaRxQ=)', // Replace 'path/to/your/image.jpg' with the actual path to your image
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     padding: '500px', 
@@ -130,9 +132,9 @@ export default function manageCourses() {
         <label htmlFor="id">Pricing ID:</label>
         <input
           type="text"
-          id="id"
-          name="id"
-          value={formData.id}
+          id="pricingId"
+          name="pricingId"
+          value={formData.pricingID}
           onChange={handleChange}
         />
       </div>

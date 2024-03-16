@@ -8,12 +8,14 @@ export default function manageWaitingList() {
   const { data: session } = useSession();
 
   const [formData, setFormData] = useState({
-    id: "",
-    name: "",
-    startDate: "",
-    endDate: "",
-    numberOfClasses: "",
-    price: "",
+     id: "",
+    category: "",
+    dateAdded: "",
+    bookingID: "",
+    managerID: "",
+    clientID: "",
+    pendingID: "",
+    yogaSessionID: "",
   });
 
   const handleChange = (e) => {
@@ -31,11 +33,13 @@ export default function manageWaitingList() {
     // Reset form fields after submission
     setFormData({
       id: "",
-      name: "",
-      startDate: "",
-      endDate: "",
-      numberOfClasses: "",
-      price: "",
+      category: "",
+      dateAdded: "",
+      bookingID: "",
+      managerID: "",
+      clientID: "",
+      pendingID: "",
+      yogaSessionID: "",
     });
   };
 
@@ -43,14 +47,14 @@ export default function manageWaitingList() {
     // CSS properties for the form
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'top',
-    justifyContent: 'center',
-    height: '70vh',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    height: '120vh',
     // background CSS properties
-    backgroundImage: 'url(https://www.stockvault.net/data/2017/07/21/237499/preview16.jpg)', // Replace 'path/to/your/image.jpg' with the actual path to your image
+    backgroundImage:'url(https://www.stockvault.net/data/2013/07/23/146814/preview16.jpg)', // Replace 'path/to/your/image.jpg' with the actual path to your image
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    padding: '500px', 
+    padding: '40px', 
   };
 
   return (
@@ -67,72 +71,72 @@ export default function manageWaitingList() {
         />
       </div>
       <div>
-        <label htmlFor="name">Course Name:</label>
+        <label htmlFor="category">Category:</label>
         <input
           type="text"
-          id="name"
-          name="name"
-          value={formData.name}
+          id="category"
+          name="category"
+          value={formData.category}
           onChange={handleChange}
         />
       </div>
       <div>
-        <label htmlFor="startDate"> Date Added: </label>
+        <label htmlFor="dateAdded"> Date Added: </label>
         <input
           type="date"
-          id="startDate"
-          name="startDate"
-          value={formData.startDate}
+          id="dateAdded"
+          name="dateAdded"
+          value={formData.dateAdded}
           onChange={handleChange}
         />
       </div>
       <div>
-        <label htmlFor="endDate">End Date: </label>
-        <input
-          type="date"
-          id="endDate"
-          name="endDate"
-          value={formData.endDate}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="numberOfClasses">Number of Classes:</label>
-        <input
-          type="number"
-          id="numberOfClasses"
-          name="numberOfClasses"
-          value={formData.numberOfClasses}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="price">Price:</label>
+        <label htmlFor="bookingID">Booking ID: </label>
         <input
           type="text"
-          id="price"
-          name="price"
-          value={formData.price}
+          id="bookingID"
+          name="bookingID"
+          value={formData.bookingID}
           onChange={handleChange}
         />
       </div>
       <div>
-        <label htmlFor="id">Studio ID:</label>
+        <label htmlFor="managerID">Manager ID:</label>
         <input
           type="text"
-          id="id"
-          name="id"
-          value={formData.id}
+          id="managerID"
+          name="managerID"
+          value={formData.managerID}
           onChange={handleChange}
         />
       </div>
       <div>
-        <label htmlFor="id">Pricing ID:</label>
+        <label htmlFor="price">Client ID:</label>
         <input
           type="text"
-          id="id"
-          name="id"
-          value={formData.id}
+          id="clientID"
+          name="clientID"
+          value={formData.clientID}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="id">Pending ID:</label>
+        <input
+          type="text"
+          id="pendingID"
+          name="pendingID"
+          value={formData.pendingID}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="id">Yoga Session ID:</label>
+        <input
+          type="text"
+          id="yogaSessionID"
+          name="yogaSessionID"
+          value={formData.yogaSessionID}
           onChange={handleChange}
         />
       </div>
@@ -143,7 +147,7 @@ export default function manageWaitingList() {
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
-    transition: 'background-color 0.3s ease',}}>ADD COURSE</button>
+    transition: 'background-color 0.3s ease',}}>ADD TO WAITING LIST</button>
     </form>
   );
 }
