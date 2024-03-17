@@ -14,7 +14,7 @@ export default function YogaRetreat() {
 
   const fetchYogaRetreats = async () => {
     try {
-      const response = await fetch('http://localhost:9091/yogaretreat');
+      const response = await fetch('http://localhost:9091/yogaretreat/getyogaretreatlist');
       const data = await response.json();
       setYogaRetreats(data);
     } catch (error) {
@@ -24,7 +24,7 @@ export default function YogaRetreat() {
 
   const handleDeleteYogaRetreat = async (id) => {
     try {
-      await fetch(`http://localhost:9091/yogaretreat/${id}`, {
+      await fetch(`http://localhost:9091/yogaretreat/deleteyogaretreat/${id}`, {
         method: 'DELETE',
       });
       setYogaRetreats(yogaRetreats.filter(retreat => retreat.id !== id));
@@ -35,7 +35,7 @@ export default function YogaRetreat() {
 
   const handleUpdateYogaRetreat = async () => {
     try {
-      await fetch(`http://localhost:9091/yogaretreat/${selectedRetreat.id}`, {
+      await fetch(`http://localhost:9091/yogaretreat/updateyogaretreat/${selectedRetreat.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export default function YogaRetreat() {
 
   const handleAddYogaRetreat = async () => {
     try {
-      const response = await fetch('http://localhost:9091/yogaretreat', {
+      const response = await fetch('http://localhost:9091/yogaretreat/addyogaretreat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
