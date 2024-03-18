@@ -75,8 +75,8 @@ const SchedulePage = () => {
                 </div>
                 <h1>Update Session Information</h1>
                 <div className="mt-2 mb-6">
-                    <label htmlFor="categoryType" className="block mb-2 text-sm font-medium text-gray-900">Type Of Session</label>
-                    <select id="categoryType" name="categoryType" value={schedule.categoryType} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                    <label htmlFor="sessionType" className="block mb-2 text-sm font-medium text-gray-900">Type Of Session</label>
+                    <select id="sessionType" name="sessionType" value={schedule.categoryType} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                         <option value="">Select Type Of Session</option>
                         <option value="Option 1">Course</option>
                         <option value="Option 2">Workshop</option>
