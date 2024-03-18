@@ -14,7 +14,7 @@ export default function manageCourses() {
     endDate: "",
     numberOfClasses: "",
     price: "",
-    pricingID: "",
+    studioID: "",
   });
 
   const handleChange = (e) => {
@@ -37,7 +37,7 @@ export default function manageCourses() {
       endDate: "",
       numberOfClasses: "",
       price: "",
-      pricingID: ""
+      studioID: ""
     });
   };
 
@@ -59,14 +59,20 @@ export default function manageCourses() {
   
     <form style={formStyles} onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="id">Booking ID:</label>
-        <input
+        <label htmlFor="id">Yoga Session ID:</label>
+        <select
           type="text"
           id="id"
           name="id"
           value={formData.id}
           onChange={handleChange}
-        />
+        >
+        <option value="">Select ID</option>
+        <option value="1">ID 1</option>
+        <option value="2">ID 2</option>
+        <option value="3">ID 3</option>
+        {/* Add more options as needed */}
+      </select>
       </div>
       <div>
         <label htmlFor="name">Course Name:</label>
@@ -119,16 +125,22 @@ export default function manageCourses() {
         />
       </div>
       <div>
-        <label htmlFor="id">Studio ID:</label>
-        <input
+        <label htmlFor="studioID">Studio ID:</label>
+        <select
           type="text"
           id="id"
           name="id"
           value={formData.id}
           onChange={handleChange}
-        />
+        >
+        <option value="">Select ID</option> 
+        <option value="1">ID 1</option>
+        <option value="2">ID 2</option>
+        <option value="3">ID 3</option>
+        {/* Add more options as needed */}
+      </select>
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="id">Pricing ID:</label>
         <input
           type="text"
@@ -137,7 +149,7 @@ export default function manageCourses() {
           value={formData.pricingID}
           onChange={handleChange}
         />
-      </div>
+      </div> */}
       <button type="submit" style={{ fontWeight: 'bold',
     padding: '5px 5px',
     backgroundColor: 'black',
