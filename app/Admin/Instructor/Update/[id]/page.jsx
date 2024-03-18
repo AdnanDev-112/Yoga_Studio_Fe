@@ -30,7 +30,7 @@ const InstrctorUpdate = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
-        axios.put('http://localhost:9091/instructor/updateinstructor/'+formData.id,formData)
+        axios.put('http://localhost:8080/instructor/updateinstructor/'+formData.id,formData)
             .then(response => {
               if(response.status == 200){
                 alert("Updated Successfully");
@@ -45,7 +45,7 @@ const InstrctorUpdate = () => {
     };
 
     function getData(){
-        axios.get('http://localhost:9091/instructor/getoneinstructor/'+ params.id)
+        axios.get('http://localhost:8080/instructor/getoneinstructor/'+ params.id)
             .then(response => {
                 if(response.status == 200){
                     setFormData(response.data);

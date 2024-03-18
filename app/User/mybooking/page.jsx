@@ -19,20 +19,20 @@ const BookingListPage = () => {
    };
 
 
-   function handleDelete(id) {
-      confirm("Are you sure you want to delete this booking?") && axios.delete('http://localhost:8080/booking/deletebooking/' + id)
-         .then(response => {
-            if (response.status == 204) {
-               console.log(response.data)
-               getData();
-            }
+   // function handleDelete(id) {
+   //    confirm("Are you sure you want to delete this booking?") && axios.delete('http://localhost:8080/booking/deletebooking/' + id)
+   //       .then(response => {
+   //          if (response.status == 204) {
+   //             console.log(response.data)
+   //             getData();
+   //          }
 
-         })
-         .catch(error => {
-            console.error('Error:', error);
-         });
+   //       })
+   //       .catch(error => {
+   //          console.error('Error:', error);
+   //       });
 
-   }
+   // }
    function getData() {
       axios.get('http://localhost:8080/booking/getbookingdetails/' + 2)
          .then(response => {
@@ -108,11 +108,11 @@ const BookingListPage = () => {
                         <td className="text-center px-6 py-4">
                            {booking.duration || 'NA'}
                         </td>
-                        <td className="px-6 py-4 text-right">
+                        {/* <td className="px-6 py-4 text-right">
                            <button onClick={() => { handleDelete(index) }} className="font-medium text-red-600 dark:text-blue-500 hover:underline">
                               Delete
                            </button>
-                        </td>
+                        </td> */}
                      </tr>
                   ))}
                </tbody>

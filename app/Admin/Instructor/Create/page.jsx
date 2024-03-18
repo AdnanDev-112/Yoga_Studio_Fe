@@ -28,7 +28,7 @@ const InstrctorCreate = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
-        axios.post('http://localhost:9091/instructor/addinstructor',formData)
+        axios.post('http://localhost:8080/instructor/addinstructor',formData)
             .then(response => {
               if(response.status == 200){
                 alert("Added Successfully");
