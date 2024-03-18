@@ -55,7 +55,7 @@ const BookNow = () => {
 
     const fetchscheduleData = (categoryType) => {
 
-        axios.get("http://localhost:9091/schedule/getschedulebycategory?categoryType=" + categoryType + "&&clientID=11")
+        axios.get("http://localhost:8080/schedule/getschedulebycategory?categoryType=" + categoryType + "&&clientID=11")
             .then(response => {
                 console.log(response.data);
                 setScheduleData(response.data || []);
@@ -73,7 +73,7 @@ const BookNow = () => {
     };
 
     const handleBack = () => {
-        router.push('/Admin/Schedule');
+        router.push('/User/dashboard');
     };
 
     const getPricingElements = () => {

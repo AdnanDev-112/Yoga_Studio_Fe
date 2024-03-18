@@ -18,7 +18,7 @@ const ScheduleHome = () => {
           className="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 cursor-pointer"
           onClick={() => handleRedirect('/Create')}
         >
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">Register a Session</h5>
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">Schedule a session</h5>
           <p className="font-normal text-gray-700">Enter details for a Session.</p>
         </div>
         <div
