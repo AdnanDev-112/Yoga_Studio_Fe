@@ -17,6 +17,9 @@ const ClientMember = async () => {
             <h1>Client Side Rendering</h1>
 
 
+
+
+
             <p>{session?.user?.userID}</p>
             <p>{session?.user?.userType}</p>
         </>

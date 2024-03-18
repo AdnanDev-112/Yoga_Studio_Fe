@@ -35,16 +35,6 @@ export default function Feedback() {
             <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit Feedback</button>
           </div>
         </form>
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">Previous Feedback</h2>
-          <ul>
-            {dummyFeedback.map((item) => (
-              <li key={item.id} className="mb-2">
-                {item.text}
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </div>
   );

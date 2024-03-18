@@ -39,8 +39,8 @@ const Navbar = () => {
             <>
             <Link href="/" className="no-underline">Home</Link>
             <Link href="/api/auth/signin" className="no-underline">Login</Link>
-            <Link href="/Admin/yoga_retreat" className="no-underline">Yoga Retreat</Link>
-            <Link href="/User/feedback" className="no-underline">Feedback</Link>
+            {/* <Link href="/Admin/yoga_retreat" className="no-underline">Yoga Retreat</Link>
+            <Link href="/User/feedback" className="no-underline">Feedback</Link> */}
 
             </>
           )}
