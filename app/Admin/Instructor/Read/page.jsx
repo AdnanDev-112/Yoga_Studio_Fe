@@ -42,7 +42,7 @@ function handleDelete(id){
   
 }
 function getData(){
-  axios.get('http://localhost:9091/instructor/getinstructorslist')
+  axios.get('http://localhost:8080/instructor/getinstructorslist')
       .then(response => {
         const updatedUrlData = response.data.length > 0 ? updateImgUrls(response.data): [];
         setInstructor(updatedUrlData);
