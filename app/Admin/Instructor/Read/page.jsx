@@ -29,7 +29,7 @@ function updateImgUrls(data){
 };
 
 function handleDelete(id){
-  confirm("Are you sure you want to delete this instructor?") && axios.delete('http://localhost:9091/instructor/deleteinstructor/'+id)
+  confirm("Are you sure you want to delete this instructor?") && axios.delete('http://localhost:8080/instructor/deleteinstructor/'+id)
       .then(response => {
         if(response.status == 204){
           getData();

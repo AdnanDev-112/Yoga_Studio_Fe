@@ -1,7 +1,7 @@
 "use client"
 import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import Link from 'next/link';
+import Link from "next/link";
 
 
 
@@ -41,10 +41,10 @@ export default function AdminDashboard() {
 
           {/* User Management */}
           <div className="bg-white rounded-lg shadow p-4">
-            <h2 className="text-xl font-semibold mb-4">User Management</h2>
-            <p>View and manage user registrations and bookings.</p>
+            <h2 className="text-xl font-semibold mb-4">Client Management</h2>
+            <p>View and manage user registrations.</p>
             <div className="text-right mt-2">
-              <a href="#" className="text-blue-500 hover:text-blue-700">View Users</a>
+              <Link href="/Admin/Clientmanagement" className="text-blue-500 hover:text-blue-700">View Clients</Link>
             </div>
           </div>
 
@@ -70,7 +70,14 @@ export default function AdminDashboard() {
             </div>
           </div>
           
-          
+          {/* Schedule */}        
+          <div className="bg-white rounded-lg shadow p-4">
+            <h2 className="text-xl font-semibold mb-4">Schedule</h2>
+            <p>View and manage Scheduled Sessions</p>
+            <div className="text-right mt-2">
+              <Link href="/Admin/Schedule" className="text-blue-500 hover:text-blue-700">View</Link>
+            </div>
+          </div>
 
           
         </div>
