@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const BookNow = () => {
     const router = useRouter();
+    const clientId = 11;
     const [formData, setFormData] = useState({
         category_type: '',
         yogaSessiontype: '',
@@ -55,7 +56,24 @@ const BookNow = () => {
 
     const fetchscheduleData = (categoryType) => {
 
-        axios.get("http://localhost:9091/schedule/getschedulebycategory?categoryType=" + categoryType + "&&clientID=11")
+        axios.get("http://localhost:9091/schedule/getschedulebycategory?categoryType=" + categoryType + "&&clientID=" + clientId)
+            .then(response => {
+                console.log(response.data);
+                setScheduleData(response.data || []);
+                setOriginalScheduleData(response.data || []);
+            })
+            .catch(error => {
+                console.error('Error fetching classes:', error);
+            });
+    };
+    const submitData = () => {
+        const dataToSubmit = {
+            clientId : clientId,
+            scheduleId : formData.selectedSessionId,
+            category_type : formData.category_type,
+        };
+
+        axios.post("http://localhost:9091/booking/addbooking",dataToSubmit)
             .then(response => {
                 console.log(response.data);
                 setScheduleData(response.data || []);
@@ -69,6 +87,10 @@ const BookNow = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
+        submitData();
+
+        alert('Booking Done Successfully!');
+        router.push('/User/dashboard');
 
     };
 
