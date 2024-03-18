@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth";
 import { options } from "../../api/auth/[...nextauth]/options";
-import Link from "next/link";
 
 
 
@@ -42,7 +41,7 @@ const UserDashboard = async () => {
               </div>
             ))}
             <div className="text-right mt-2">
-            <Link href="/User/mybooking/" className="text-blue-500 hover:text-blue-700">View all Bookings</Link>
+              <a href="#" className="text-blue-500 hover:text-blue-700">View all</a>
             </div>
           </div>
 
