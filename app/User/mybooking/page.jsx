@@ -16,7 +16,7 @@ const BookingListPage = () => {
 
    const handleBack = () => {
       router.push('/User/mybooking');
-   };
+   }; 
 
 
    // function handleDelete(id) {
