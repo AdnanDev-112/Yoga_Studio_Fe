@@ -58,6 +58,7 @@ const YogaretreatPage = () => {
                   <h2 className="text-lg font-semibold text-gray-800">{retreat.retreatName}</h2>
                   <p className="text-sm text-gray-600">Meal: {retreat.meal}</p>
                   <p className="text-sm text-gray-600">Activity Type: {retreat.activityType}</p>
+                  <p className="text-sm text-gray-600">Instructor: {retreat.instructorName}</p>
                   <p className="text-sm text-gray-600">Date: {retreat.date}</p>
                   <div className="mt-2">
                     <button onClick={() => { handleDelete(retreat.id) }} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">

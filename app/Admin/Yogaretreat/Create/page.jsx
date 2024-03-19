@@ -1,12 +1,15 @@
 'use client'
 // 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 const CreateYogaretreatPage = () => {
     const router = useRouter();
-    
+    useEffect(() => {
+        getData();
+    }, []);
+
     const [formData, setFormData] = useState({
         retreatName: '',
         meal: '',
@@ -14,9 +17,23 @@ const CreateYogaretreatPage = () => {
         date: '',
         pricing_id: '1',
         yoga_session_id: '1',
-        instructor_id: '1',
     });
-
+    const [instructorList, setInstructorList] = useState([]);
+    function getData(){
+        
+            axios.get('http://localhost:8080/instructor/getinstructorslist')
+            .then(response => {
+                if(response.status == 200){
+                    setInstructorList(response.data);
+                }else{
+                    alert("Something Went Wrong");
+                }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+      
+      }
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -82,7 +99,7 @@ const CreateYogaretreatPage = () => {
                 </div>
                 <div className="mt-2 mb-6">
                     <label htmlFor="activityType" className="block mb-2 text-sm font-medium text-gray-900">Activity Type</label>
-                    <input
+                    <select
                         type="text"
                         id="activityType"
                         name="activityType"
@@ -91,8 +108,24 @@ const CreateYogaretreatPage = () => {
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Activity Type"
                         required
-                    />
+                    >
+                        <option value="">Select Type Of Activity</option>
+                        <option value="drawing">Drawing</option>
+                        <option value="meditation">Meditation</option>
+                        <option value="singing">Singing</option>
+                    </select>
                 </div>
+                <div className="mb-6">
+                    <label htmlFor="instructorId" className="block mb-2 text-sm font-medium text-gray-900"> Instructor:</label>
+                    <select type="instructorId" id="instructorId" name="instructorId" value={formData.instructorId} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Activity Type" required >
+                        <option value="">Select Instructor</option>
+                        
+                        {instructorList.map((instructor) => (
+                                <option value={instructor.id}>{instructor.instructorName}</option>
+                        ))
+                        }
+                    </select>
+                </div> 
                 <div className="mt-2 mb-6">
                     <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900">Date</label>
                     <input
