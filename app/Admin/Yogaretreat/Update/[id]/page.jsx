@@ -81,7 +81,7 @@ const YogaretreatUpdate = () => {
 
     
     const handleBack = () => {
-        router.push('/Admin/Yogaretreat'); 
+        router.push('/Admin/Yogaretreat/Read'); 
     };
 
     

@@ -13,7 +13,7 @@ const YogaretreatPage = () => {
   }, []);
 
   const handleBack = () => {
-    router.back();
+    router.push('/Admin/Yogaretreat');
   };
 
   function handleDelete(id) {

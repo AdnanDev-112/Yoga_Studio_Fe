@@ -50,7 +50,7 @@ const CreateYogaretreatPage = () => {
             .then(response => {
                 if (response.status == 200) {
                     alert("Added Successfully");
-                    handleBack();
+                    router.push('/Admin/Yogaretreat/Read');
                 }
             })
             .catch(error => {
