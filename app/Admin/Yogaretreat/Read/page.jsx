@@ -18,7 +18,7 @@ const YogaretreatPage = () => {
 
   function handleDelete(id) {
     confirm("Are you sure you want to delete this yogaretreat?") &&
-      axios.delete(`http://localhost:8080/yogaretreat/deleteyogaretreat/${id}`)
+      axios.delete(`http://localhost:9091/yogaretreat/deleteyogaretreat/${id}`)
         .then(response => {
           if (response.status === 204) {
             getYogaRetreats();
@@ -30,7 +30,7 @@ const YogaretreatPage = () => {
   }
 
   function getYogaRetreats() {
-    axios.get('http://localhost:8080/yogaretreat/getyogaretreatlist')
+    axios.get('http://localhost:9091/yogaretreat/getyogaretreatlist')
       .then(response => {
         setYogaRetreats(response.data);
       })

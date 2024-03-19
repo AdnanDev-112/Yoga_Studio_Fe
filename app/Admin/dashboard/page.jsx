@@ -79,6 +79,15 @@ export default function AdminDashboard() {
             </div>
           </div>
 
+          {/* Yoag Retreat */}        
+          <div className="bg-white rounded-lg shadow p-4">
+            <h2 className="text-xl font-semibold mb-4">Yoga Retreat</h2>
+            <p>View and manage Yoga Retreat Sessions</p>
+            <div className="text-right mt-2">
+              <Link href="/Admin/Yogaretreat" className="text-blue-500 hover:text-blue-700">View</Link>
+            </div>
+          </div>
+
           
         </div>
       </div>

@@ -38,7 +38,7 @@ const YogaretreatUpdate = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
-        axios.put('http://localhost:8080/yogaretreat/updateyogaretreat/'+formData.id,formData)
+        axios.put('http://localhost:9091/yogaretreat/updateyogaretreat/'+formData.id,formData)
             .then(response => {
               if(response.status == 200){
                 alert("Updated Successfully");
@@ -53,7 +53,7 @@ const YogaretreatUpdate = () => {
     };
 
     function getData(){
-        axios.get('http://localhost:8080/yogaretreat/getyogaretreat/'+ params.id)
+        axios.get('http://localhost:9091/yogaretreat/getyogaretreat/'+ params.id)
             .then(response => {
                 if(response.status == 200){
                     setFormData(response.data);
@@ -65,7 +65,7 @@ const YogaretreatUpdate = () => {
               console.error('Error:', error);
             });
 
-            axios.get('http://localhost:8080/instructor/getinstructorslist')
+            axios.get('http://localhost:9091/instructor/getinstructorslist')
             .then(response => {
                 if(response.status == 200){
                     setInstructorList(response.data);

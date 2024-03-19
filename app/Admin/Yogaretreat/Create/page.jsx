@@ -21,7 +21,7 @@ const CreateYogaretreatPage = () => {
     const [instructorList, setInstructorList] = useState([]);
     function getData(){
         
-            axios.get('http://localhost:8080/instructor/getinstructorslist')
+            axios.get('http://localhost:9091/instructor/getinstructorslist')
             .then(response => {
                 if(response.status == 200){
                     setInstructorList(response.data);
@@ -46,7 +46,7 @@ const CreateYogaretreatPage = () => {
         e.preventDefault();
         // Add to submit the form data, such as sending a request to your backend
         console.log(formData); 
-        axios.post('http://localhost:8080/yogaretreat/addyogaretreat', formData)
+        axios.post('http://localhost:9091/yogaretreat/addyogaretreat', formData)
             .then(response => {
                 if (response.status == 200) {
                     alert("Added Successfully");
