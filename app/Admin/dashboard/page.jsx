@@ -3,9 +3,6 @@ import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { Link } from 'react-router-dom';
 
-import Link from "next/link";
-
-
 
 export default function AdminDashboard() {
   const { data: session } = useSession();

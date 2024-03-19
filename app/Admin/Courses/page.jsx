@@ -1,14 +1,14 @@
 //"use admin";
 "use client";
-import { useSession } from "next-auth/react";
-import { useRouter, useParams } from "next/navigation";
+//import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function manageCourses() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
-  const params = useParams();
+  //const params = useParams();
   const router = useRouter();
 
   useEffect(() => {
