@@ -33,7 +33,7 @@ const ClientUpdate = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
-        axios.put('http://localhost:8080/client/updateclient/'+formData.id,formData)
+        axios.put('http://localhost:9091/client/updateclient/'+formData.id,formData)
             .then(response => {
               if(response.status == 200){
                 alert("Updated Successfully");

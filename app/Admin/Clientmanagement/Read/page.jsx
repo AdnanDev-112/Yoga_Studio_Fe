@@ -29,7 +29,7 @@ const ClientmanagementPage = () => {
   };
 
   function handleDelete(id) {
-    confirm("Are you sure you want to delete this client?") && axios.delete('http://localhost:8080/client/deleteclient/' + id)
+    confirm("Are you sure you want to delete this client?") && axios.delete('http://localhost:9091/client/deleteclient/' + id)
       .then(response => {
         if (response.status == 204) {
           getData();
@@ -42,7 +42,7 @@ const ClientmanagementPage = () => {
 
   }
   function getData() {
-    axios.get('http://localhost:8080/client/getclientlist')
+    axios.get('http://localhost:9091/client/getclientlist')
       .then(response => {
         const updatedUrlData = response.data.length > 0 ? updateImgUrls(response.data) : [];
         setClient(updatedUrlData);

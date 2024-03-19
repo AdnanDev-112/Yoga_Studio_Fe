@@ -30,7 +30,7 @@ const CreateClientPage = () => {
         e.preventDefault();
         // Add to submit the form data, such as sending a request to your backend
         console.log(formData); 
-        axios.post('http://localhost:8080/client/addclient', formData)
+        axios.post('http://localhost:9091/client/addclient', formData)
             .then(response => {
                 if (response.status == 200) {
                     alert("Added Successfully");
