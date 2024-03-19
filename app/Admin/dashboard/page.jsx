@@ -23,10 +23,10 @@ export default function AdminDashboard() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Activites aka Classes/Workshop */}
           <div className="bg-white rounded-lg shadow p-4">
-            <h2 className="text-xl font-semibold mb-4">Activities</h2>
-            <p>Manage and schedule new Activities (classes and workshops).</p>
+            <h2 className="text-xl font-semibold mb-4">Yoga Sessions</h2>
+            <p>Manage and schedule new sessions (classes and workshops).</p>
             <div className="text-right mt-2">
-              <a href="/Admin/Activities/" className="text-blue-500 hover:text-blue-700">Manage</a>
+              <a href="/Admin/Yogasession/" className="text-blue-500 hover:text-blue-700">Manage</a>
             </div>
           </div>
 

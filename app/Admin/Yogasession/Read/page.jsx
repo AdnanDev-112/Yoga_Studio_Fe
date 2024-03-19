@@ -23,7 +23,7 @@ const SessionManagementRead = () => {
     return data.map((elem, index) => {
       return {
         ...elem,
-        imageUrl: "https://source.unsplash.com/800x900/?yogateacher"
+        imageUrl: "https://source.unsplash.com/800x900/?yogaclass"
       }
     })
 
@@ -79,7 +79,7 @@ const SessionManagementRead = () => {
                       Delete
                     </button>
                     <Link className="ml-2 bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
-                      href={"/Admin/Activities/Update/" + yogasession.id}>
+                      href={"/Admin/Yogasession/Update/" + yogasession.id}>
                       Update
                     </Link>
                   </div>

@@ -8,7 +8,7 @@ const SessionManagement = () => {
   
   const handleRedirect = (path) => {
   
-  const newPath = `/Admin/Activities/${path}`;
+  const newPath = `/Admin/Yogasession/${path}`;
   router.push(newPath);
   };
   return(
