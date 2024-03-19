@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const CreateActivity = () => {
   const [formData, setFormData] = useState({
-    activity_type: '',
+    activityType: '',
     level: '',
     max_capacity: '',
     pricing_id: 3,
@@ -30,7 +30,7 @@ const CreateActivity = () => {
     e.preventDefault();
     console.log(formData);
     axios
-      .post('http://localhost:8080/yoga_session/addYogaSession', formData)
+      .post('http://localhost:9091/yoga_session/addYogaSession', formData)
       .then((response) => {
         if (response.status === 200) {
           alert('Added Successfully');
@@ -51,14 +51,14 @@ const CreateActivity = () => {
       <br /> Start with what you want to Create.
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-lg bg-white p-8 rounded-lg shadow"
+        className="w-full max-w-lg bg-white p-8 rounded-lg shadow" align="center"
       >
         <div name="Create">
           <label> Session Type: </label>
           <select
             id="sessionType"
-            name="activity_type"
-            value={formData.activity_type}
+            name="activityType"
+            value={formData.activityType}
             onChange={handleChange}
           >
             <option> --Select Session --</option>
@@ -73,9 +73,9 @@ const CreateActivity = () => {
             onChange={handleChange}
           >
             <option> --Select Level--</option>
-            <option value="Beginner"> Beginner</option>
-            <option value="Intermediate"> Intermediate</option>
-            <option value="Advance"> Advance</option>
+            <option value="beginner"> Beginner</option>
+            <option value="interim"> Intermediate</option>
+            <option value="advanced"> Advance</option>
           </select>{' '}
           <br /> <br />
           <label> Client Capacity:</label>

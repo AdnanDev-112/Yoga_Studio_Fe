@@ -3,10 +3,11 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import SessionManagement from '../page';
 
-const ClientmanagementPage = () => {
+const SessionManagementRead = () => {
   const router = useRouter();
-  const [Client, setClient] = useState([]);
+  const [YogaSession, setYogaSession] = useState([]);
 
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const ClientmanagementPage = () => {
   };
 
   function handleDelete(id) {
-    confirm("Are you sure you want to delete this client?") && axios.delete('http://localhost:8080/client/deleteclient/' + id)
+    confirm("Are you sure you want to delete this Session?") && axios.delete('http://localhost:9091/yoga_session/deletesession/' + id)
       .then(response => {
         if (response.status == 204) {
           getData();
@@ -42,10 +43,10 @@ const ClientmanagementPage = () => {
 
   }
   function getData() {
-    axios.get('http://localhost:9091/client/getclientlist')
+    axios.get('http://localhost:9091/yoga_session/getYogaSessions')
       .then(response => {
         const updatedUrlData = response.data.length > 0 ? updateImgUrls(response.data) : [];
-        setClient(updatedUrlData);
+        setYogaSession(updatedUrlData);
       })
       .catch(error => {
         console.error('Error:', error);
@@ -63,22 +64,22 @@ const ClientmanagementPage = () => {
           </span>
         </div>
 
-        <h1 className="text-3xl font-semibold text-gray-900">Our Clients</h1>
+        <h1 className="text-3xl font-semibold text-gray-900">Sessions</h1>
         <div className="mt-6 overflow-auto max-h-[calc(100vh-4rem)]">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Client.map((client) => (
-              <div key={client.id} className="bg-white rounded-lg shadow overflow-hidden">
-                <img src={client.imageUrl} alt={client.clientName} className="w-full h-56 object-cover object-center" />
+            {YogaSession.map((yogasession) => (
+              <div key={yogasession.id} className="bg-white rounded-lg shadow overflow-hidden">
+                <img src={yogasession.imageUrl} alt={yogasession.activityType} className="w-full h-56 object-cover object-center" />
                 <div className="p-6">
-                  <h2 className="text-lg font-semibold text-gray-800">{client.ClientName}</h2>
-                  <p className="text-sm text-gray-600">Client Name: {client.clientName}</p>
+                  <h2 className="text-lg font-semibold text-gray-800">{yogasession.activityType}</h2>
+                  <p className="text-sm text-gray-600">Level: {yogasession.level}</p>
                   {/* <p className="mt-3 text-gray-600">{instructor.bio}</p> */}
                   <div className="mt-2">
-                    <button onClick={() => { handleDelete(client.id) }} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+                    <button onClick={() => { handleDelete(yogasession.id) }} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
                       Delete
                     </button>
                     <Link className="ml-2 bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
-                      href={"/Admin/Clientmanagement/Update/" + client.id}>
+                      href={"/Admin/Activities/Update/" + yogasession.id}>
                       Update
                     </Link>
                   </div>
@@ -92,4 +93,4 @@ const ClientmanagementPage = () => {
   );
 };
 
-export default ClientmanagementPage;
+export default SessionManagementRead;

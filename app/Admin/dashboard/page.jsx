@@ -26,7 +26,7 @@ export default function AdminDashboard() {
             <h2 className="text-xl font-semibold mb-4">Activities</h2>
             <p>Manage and schedule new Activities (classes and workshops).</p>
             <div className="text-right mt-2">
-              <a href="/Admin/Activities/Create" className="text-blue-500 hover:text-blue-700">Manage</a>
+              <a href="/Admin/Activities/" className="text-blue-500 hover:text-blue-700">Manage</a>
             </div>
           </div>
 
