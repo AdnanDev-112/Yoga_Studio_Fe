@@ -6,11 +6,17 @@ import axios from 'axios';
 
 const SchedulePage = () => {
     const router = useRouter();
-    const [schedule, setSchedule] = useState([]);
+    
+    const [schedule, setSchedule] = useState({
+        scheduleId: '',
+            category_type: '',
+            startTime: '',
+            endTime: '',
+            date: '',
+            sessionName: ''
+    });
     const params = useParams();
-    const [selectedOption, setSelectedOption] = useState(false); // Initialize with default value
-
-
+    
     useEffect(() => {
         getData();
     }, []);
@@ -20,7 +26,7 @@ const SchedulePage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
-        axios.put('http://localhost:9091/client/updateclient/' + formData.id, formData)
+        axios.put('http://localhost:9091/schedule/updateschedule/' + schedule.id, setSchedule)
             .then(response => {
                 if (response.status == 200) {
                     alert("Updated Successfully");
@@ -45,10 +51,10 @@ const SchedulePage = () => {
     };
 
     function getData() {
-        axios.get('http://localhost:9091/client/getclient/' + params.id)
+        axios.get('http://localhost:9091/schedule/getschedule/' + params.id)
             .then(response => {
                 if (response.status == 200) {
-                    setFormData(response.data);
+                    setSchedule(response.data);
                 } else {
                     alert("Something Went Wrong");
                 }
@@ -73,76 +79,30 @@ const SchedulePage = () => {
                         ← Back
                     </span>
                 </div>
-                <h1>Update Session Information</h1>
+                <h1>Update Schedule Information</h1>
                 <div className="mt-2 mb-6">
-                    <label htmlFor="sessionType" className="block mb-2 text-sm font-medium text-gray-900">Type Of Session</label>
+                    <label htmlFor="sessionType" className="block mb-2 text-sm font-medium text-gray-900">Type Of Category</label>
                     <select id="sessionType" name="sessionType" value={schedule.categoryType} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                        <option value="">Select Type Of Session</option>
+                        <option value="">Select Type Of Category</option>
                         <option value="Option 1">Course</option>
-                        <option value="Option 2">Workshop</option>
-                        <option value="Option 3">Class</option>
+                        <option value="Option 2">Yoga_session</option>
+                        <option value="Option 3">Retreat</option>
                     </select>
                 </div>
-                <div className="mt-2 mb-6">
-                    <label htmlFor="level" className="block mb-2 text-sm font-medium text-gray-900">Type Of Level</label>
-                    <select id="level" name="level" value={schedule.level} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                        <option value="">Select Type Of Level</option>
-                        <option value="Option 1">Interim</option>
-                        <option value="Option 2">Beginner</option>
-                        <option value="Option 3">Advanced</option>
-                    </select>
+            
+                <div className="mb-6">
+                    <label htmlFor="startTime" className="block mb-2 text-sm font-medium text-gray-900">Start Time</label>
+                    <input type="time" id="startTime" name="startTime" value={schedule.startTime} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Start Time" required />
                 </div>
                 <div className="mb-6">
-                    <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900">Class Capacity</label>
-                    <input type="capacity" id="capacity" name="capacity" value={schedule.maxCapacity} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Capacity" required />
-                </div>
-                <div className="mt-2 mb-6">
-                    <label htmlFor="level" className="block mb-2 text-sm font-medium text-gray-900">Price</label>
-                    <select id="level" name="level" value={schedule.amount} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                        <option value="">Select Price for Sessions</option>
-                        <option value="Option 1">£30</option>
-                        <option value="Option 2">£40</option>
-                        <option value="Option 3">£50</option>
-                        <option value="Option 3">£60</option>
-                        <option value="Option 3">£70</option>
-                    </select>
+                    <label htmlFor="endTime" className="block mb-2 text-sm font-medium text-gray-900">End Time</label>
+                    <input type="time" id="endTime" name="endTime" value={schedule.endTime} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="End Time" required />
                 </div>
                 <div className="mb-6">
-                    <label htmlFor="Duration" className="block mb-2 text-sm font-medium text-gray-900">Duration</label>
-                    <input type="Duration" id="Duration" name="Duration" value={schedule.duration} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Duration" required />
+                    <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900">Date</label>
+                    <input type="date" id="date" name="date" value={schedule.date} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Capacity" required />
                 </div>
-                <div className="mb-6">
-                    <label htmlFor="recurring" className="block mb-2 text-sm font-medium text-gray-900">Recurring</label>
-                    <div className="flex items-center gap-4">
-                        <button
-                            type="button"
-                            className={`py-2 px-4 rounded-lg focus:outline-none focus:ring-2 ${!selectedOption ? 'bg-green-500 hover:bg-green-600 text-white' : 'bg-gray-300 hover:bg-gray-400 text-gray-700'}`}
-                            onClick={() => handleChange(true)}
-                        >
-                            Yes
-                        </button>
-                        <button
-                            type="button"
-                            className={`py-2 px-4 rounded-lg focus:outline-none focus:ring-2 ${selectedOption ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-gray-300 hover:bg-gray-400 text-gray-700'}`}
-                            onClick={() => handleChange(false)}
-                        >
-                            No
-                        </button>
-                    </div>
-                </div>
-
-                <div className="mb-6">
-                    <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900">Instructor Name</label>
-                    <input type="name" id="name" name="name" value={schedule.instructorName} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Instructor Name" required />
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900">Manager</label>
-                    <input type="name" id="name" name="name" value={schedule.managerName} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Manager Name" required />
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900">Studio</label>
-                    <input type="address" id="address" name="address" value={schedule.address} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Studio Address" required />
-                </div>
+            
                 <button type="submit" className="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
             </form>
         </div>
