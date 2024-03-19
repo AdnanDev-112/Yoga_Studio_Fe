@@ -17,7 +17,7 @@ const SchedulePage = () => {
     };
 
     function handleDelete(id) {
-        confirm("Are you sure you want to delete this session?") && axios.delete('http://localhost:8080/schedule/deleteschedule/' + id)
+        confirm("Are you sure you want to delete this session?") && axios.delete('http://localhost:9091/schedule/deleteschedule/' + id)
             .then(response => {
                 if (response.status == 204) {
                     getData();
@@ -31,7 +31,7 @@ const SchedulePage = () => {
     }
 
     function getData() {
-        axios.get('http://localhost:8080/schedule/getschedulelist')
+        axios.get('http://localhost:9091/schedule/getschedulelist')
             .then(response => {
                 console.log(response.data);
                 setSchedule(response.data);
