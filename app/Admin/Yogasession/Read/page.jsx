@@ -16,7 +16,7 @@ const SessionManagementRead = () => {
 
 
   const handleBack = () => {
-    router.back();
+    router.push('/Admin/Yogasession');
   };
 
   function updateImgUrls(data) {

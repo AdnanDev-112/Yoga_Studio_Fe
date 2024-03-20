@@ -20,7 +20,7 @@ const BookingListPage = () => {
 
 
    // function handleDelete(id) {
-   //    confirm("Are you sure you want to delete this booking?") && axios.delete('http://localhost:8080/booking/deletebooking/' + id)
+   //    confirm("Are you sure you want to delete this booking?") && axios.delete('http://localhost:9091/booking/deletebooking/' + id)
    //       .then(response => {
    //          if (response.status == 204) {
    //             console.log(response.data)
@@ -34,7 +34,7 @@ const BookingListPage = () => {
 
    // }
    function getData() {
-      axios.get('http://localhost:8080/booking/getbookingdetails/' + 2)
+      axios.get('http://localhost:9091/booking/getbookingdetails/' + 2)
          .then(response => {
             console.log(response.data);
             setBooking(response.data);

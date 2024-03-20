@@ -110,7 +110,7 @@ const YogaSessionCreate = () => {
 
 
     const handleBack = () => {
-        router.push('/Admin/Instructor');
+        router.push('/Admin/Yogasession');
     };
 
 

@@ -1,23 +1,24 @@
 'use client'
-import { useRouter } from 'next/navigation';
+import { useRouter , useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
 const YogaSessionCreate = () => {
     const router = useRouter();
+    const params = useParams();
 
     const [formData, setFormData] = useState({
         sessionName: '',
         maxCapacity: '',
-        level: 'beginner',
+        level: '',
         instructorId: '',
-        activityType: 'Aerial',
+        activityType: '',
         price: '',
         duration: '',
         recurring: false,
         studioId: '',
-        categoryType: 'Workshop',
+        categoryType: '',
 
     });
 
@@ -63,6 +64,29 @@ const YogaSessionCreate = () => {
     const fetchInitData = async() => {
         let instructorData = [{id:''}];
         let studioData = [{id:''}];
+
+
+
+        await axios.get('http://localhost:9091/yoga_session/getoneyogasession/'+ params.id)
+            .then(response => {
+                if(response.status == 200){
+                    console.log(response.data);
+
+                setFormData(response.data);                
+                setFormData(prevState => ({
+                ...prevState,
+                categoryType: response.data.recurring ? 'Class' : 'Workshop',
+                price: response.data.pricing.amount,
+                instructorId: response.data.instructor.id,
+                studioId: response.data.studio.id
+            }));
+                }else{
+                    alert("Something Went Wrong");
+                }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
         await axios.get('http://localhost:9091/instructor/getinstructorslist')
             .then(response => {
                 instructorData = response.data;
@@ -79,14 +103,7 @@ const YogaSessionCreate = () => {
             })
             .catch(error => {
                 console.error('Error:', error);
-            });
-            setFormData(prevState => ({
-                ...prevState,
-                instructorId: instructorData[0].id,
-                studioId: studioData[0].id
-            }));
-
-
+            });  
 
     }
 
@@ -94,10 +111,10 @@ const YogaSessionCreate = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
-        axios.post('http://localhost:9091/yoga_session/addYogaSession', formData)
+        axios.put('http://localhost:9091/yoga_session/updatesession/' + params.id, formData)
             .then(response => {
                 if (response.status == 200) {
-                    alert("Added Successfully");
+                    alert("Updated Successfully");
                     handleBack();
                 }
 
@@ -110,7 +127,7 @@ const YogaSessionCreate = () => {
 
 
     const handleBack = () => {
-        router.push('/Admin/Instructor');
+        router.push('/Admin/Yogasession');
     };
 
 
@@ -122,10 +139,11 @@ const YogaSessionCreate = () => {
                         ← Back
                     </span>
                 </div>
-                <h1>Add Yoga Session</h1>
+                <h1>Update Session</h1>
                 <div className="mt-2 mb-6">
                     <label htmlFor="recurring" className="block mb-2 text-sm font-medium text-gray-900">Session Type</label>
                     <select
+                    disabled
                         id="recurring"
                         name="recurring"
                         value={formData.recurring}
