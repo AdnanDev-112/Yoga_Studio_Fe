@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-const InstrctorUpdate = () => {
+const SessionUpdate = () => {
     const router = useRouter();
     const params = useParams();
 
@@ -14,8 +14,15 @@ const InstrctorUpdate = () => {
 
 
     const [formData, setFormData] = useState({
-        instructorName: '',
-        telnum: '',
+        activityType: '',
+        level: '',
+        max_capacity: '',
+        pricing_id: 3,
+        duration: '',
+        recurring: 0,
+        instructor_id: '1',
+        manager_id: '1',
+        studio_id: '1',
     });
 
     const handleChange = (e) => {
@@ -30,7 +37,7 @@ const InstrctorUpdate = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
-        axios.put('http://localhost:9091/instructor/updateinstructor/'+formData.id,formData)
+        axios.put('http://localhost:9091/yoga_session/updatesession/'+formData.id,formData)
             .then(response => {
               if(response.status == 200){
                 alert("Updated Successfully");
@@ -45,7 +52,7 @@ const InstrctorUpdate = () => {
     };
 
     function getData(){
-        axios.get('http://localhost:9091/instructor/getoneinstructor/'+ params.id)
+        axios.get('http://localhost:9091/yoga_session/getoneyogasession/'+ params.id)
             .then(response => {
                 if(response.status == 200){
                     setFormData(response.data);
@@ -61,7 +68,7 @@ const InstrctorUpdate = () => {
 
     
     const handleBack = () => {
-        router.push('/Admin/Instructor'); 
+        router.push('/Admin/Activities'); 
     };
 
     
@@ -73,19 +80,45 @@ const InstrctorUpdate = () => {
                     ← Back
                 </span>
             </div>
-                <h1>Update Instructor</h1>
+                <h1>Update Session Information</h1>
                 <div className="mt-2 mb-6">
-                    <label htmlFor="instructorName" className="block mb-2 text-sm font-medium text-gray-900">Name</label>
-                    <input type="text" id="instructorName" name="instructorName" value={formData.instructorName} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="John Doe" required />
-                </div>
+                <label> Session Type: </label>
+          <select
+            id="sessionType"
+            name="activityType"
+            value={formData.activityType}
+            onChange={handleChange}
+          >
+            <option> --Select Session --</option>
+            <option value="Class"> Class</option>
+            <option value="Workshop"> Workshop</option>
+          </select></div>
                 <div className="mb-6">
-                    <label htmlFor="telnum" className="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
-                    <input type="tel" id="telnum" name="telnum" value={formData.telnum} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="123-456-7890" required />
-                </div> 
+                    <label htmlFor="telnum" className="block mb-2 text-sm font-medium text-gray-900">Level</label>
+                    <select
+            id=""
+            name="level"
+            value={formData.level}
+            onChange={handleChange}
+          >
+            <option> --Select Level--</option>
+            <option value="beginner"> Beginner</option>
+            <option value="interim"> Intermediate</option>
+            <option value="advanced"> Advance</option>
+          </select></div> 
+          <label> Duration:</label>
+        <select id="" name="duration" value={formData.duration} onChange={handleChange}>
+          <option value=""> --Select Time in Minutes--</option>
+          <option value="60"> 60 </option>
+          <option value="75"> 75 </option>
+          <option value="90"> 90 </option>
+        </select> <br/> <br/>
+   
                 <button type="submit" className="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
             </form>
         </div>
     );
 };
 
-export default InstrctorUpdate;
+export default SessionUpdate;
+ <br/>
