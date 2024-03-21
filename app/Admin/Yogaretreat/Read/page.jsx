@@ -32,6 +32,7 @@ const YogaretreatPage = () => {
   function getYogaRetreats() {
     axios.get('http://localhost:9091/yogaretreat/getyogaretreatlist')
       .then(response => {
+        console.log(response.data);
         setYogaRetreats(response.data);
       })
       .catch(error => {
@@ -51,15 +52,17 @@ const YogaretreatPage = () => {
         <h1 className="text-3xl font-semibold text-gray-900">Yoga Retreats</h1>
         <div className="mt-6 overflow-auto max-h-[calc(100vh-4rem)]">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {yogaRetreats.map((retreat) => (
-              <div key={retreat.retreat_id} className="bg-white rounded-lg shadow overflow-hidden">
+            {yogaRetreats.map((retreat,index) => (
+              <div key={index} className="bg-white rounded-lg shadow overflow-hidden">
                 <img src={`https://source.unsplash.com/800x900/?yogaretreat`} alt={retreat.retreatName} className="w-full h-56 object-cover object-center" />
                 <div className="p-6">
                   <h2 className="text-lg font-semibold text-gray-800">{retreat.retreatName}</h2>
                   <p className="text-sm text-gray-600">Meal: {retreat.meal}</p>
                   <p className="text-sm text-gray-600">Activity Type: {retreat.activityType}</p>
-                  <p className="text-sm text-gray-600">Instructor: {retreat.instructorName}</p>
-                  <p className="text-sm text-gray-600">Date: {retreat.date}</p>
+                  <p className="text-sm text-gray-600">Instructor: {retreat.instructor.instructorName}</p>
+                  <p className="text-sm text-gray-600">Price : {retreat.pricing.amount}</p>
+                  <p className="text-sm text-gray-600">Workshop : {retreat.yogaSession.sessionName}</p>
+                  
                   <div className="mt-2">
                     <button onClick={() => { handleDelete(retreat.id) }} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
                       Delete
@@ -81,3 +84,5 @@ const YogaretreatPage = () => {
 };
 
 export default YogaretreatPage;
+
+

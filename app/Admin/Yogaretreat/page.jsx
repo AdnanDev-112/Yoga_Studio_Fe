@@ -2,7 +2,7 @@
  
 import { useRouter } from 'next/navigation'
  
-const UserManagement = () => {
+const RetreatManagement = () => {
   const router = useRouter();
   
   const handleRedirect = (path) => {
@@ -34,4 +34,4 @@ const UserManagement = () => {
 
 };
 
-export default UserManagement;
+export default RetreatManagement;
