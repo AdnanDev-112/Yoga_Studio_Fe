@@ -42,7 +42,7 @@ const SchedulePage = () => {
     }
 
     return (
-        <div className="booking-list">
+        <div className="schedule-list">
             <div className="self-start mb-4 cursor-pointer span">
                 <span onClick={() => handleBack()} className="text-base text-blue-500 hover:text-blue-700">
                     ← Back

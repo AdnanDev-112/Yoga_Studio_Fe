@@ -15,7 +15,7 @@ const BookingListPage = () => {
 
 
    const handleBack = () => {
-      router.push('/User/mybooking');
+      router.push('/User/dashboard');
    };
 
 
@@ -34,7 +34,7 @@ const BookingListPage = () => {
 
    // }
    function getData() {
-      axios.get('http://localhost:8080/booking/getbookingdetails/' + 2)
+      axios.get('http://localhost:9091/booking/getbookingdetails/' + 2)
          .then(response => {
             console.log(response.data);
             setBooking(response.data);
@@ -91,22 +91,22 @@ const BookingListPage = () => {
                   {booking && booking.map((booking, index) => (
                      <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                           {booking.categoryType || 'NA'}
+                           {booking.categoryType || 'Not Assigned'}
                         </td>
                         <td className="text-center px-6 py-4">
-                           {booking.level || 'NA'}
+                           {booking.level || 'Not Assigned'}
                         </td>
                         <td className="text-center px-6 py-4">
-                           {booking.startDate || 'NA'}
+                           {booking.startDate || 'Not Assigned'}
                         </td>
                         <td className="text-center px-6 py-4">
                            £{booking.amount || '0'}
                         </td>
                         <td className="text-center px-6 py-4">
-                           {booking.instructorName || 'NA'}
+                           {booking.instructorName || 'Not Assigned'}
                         </td>
                         <td className="text-center px-6 py-4">
-                           {booking.duration || 'NA'}
+                           {booking.duration || 'Not Assigned'}
                         </td>
                         {/* <td className="px-6 py-4 text-right">
                            <button onClick={() => { handleDelete(index) }} className="font-medium text-red-600 dark:text-blue-500 hover:underline">
