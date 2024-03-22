@@ -63,10 +63,19 @@ const ScheduleForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setFormData((previous)=>{
+            return {
+            ...previous,
+            studioId:  parseInt(formData.studioId), 
+            yogasessionId: parseInt(formData.yogasessionId)
+
+            }
+
+        })
         axios.post("http://localhost:9091/course/addcoursedata", formData)
             .then(response => {
                 console.log(response.data);
-                alert('Schedule added Successfully!');
+                alert('Course added Successfully!');
                 router.push('/Admin/Course');
             })
             .catch(error => {

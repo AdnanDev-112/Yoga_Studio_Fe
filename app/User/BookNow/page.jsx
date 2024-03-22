@@ -68,12 +68,12 @@ const BookNow = () => {
     };
     const submitData = () => {
         const dataToSubmit = {
-            clientId : clientId,
-            scheduleId : formData.selectedSessionId,
-            category_type : formData.category_type,
+            clientId: clientId,
+            scheduleId: formData.selectedSessionId,
+            category_type: formData.category_type,
         };
 
-        axios.post("http://localhost:9091/booking/addbooking",dataToSubmit)
+        axios.post("http://localhost:9091/booking/addbooking", dataToSubmit)
             .then(response => {
                 console.log(response.data);
                 setScheduleData(response.data || []);

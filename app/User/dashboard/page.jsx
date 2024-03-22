@@ -42,7 +42,7 @@ const UserDashboard = async () => {
               </div>
             ))}
             <div className="text-right mt-2">
-            <Link href="/User/mybooking/" className="text-blue-500 hover:text-blue-700">View all Bookings</Link>
+            <Link href="/User/Mybooking/" className="text-blue-500 hover:text-blue-700">View all Bookings</Link>
             </div>
           </div>
 
