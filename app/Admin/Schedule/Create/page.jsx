@@ -17,12 +17,11 @@ const ScheduleForm = () => {
         startTime: '',
         endTime: '',
         date: '',
-        numberOfClasses: '0'
-        // yogasessionId: '',
-        // retreatId: '',
-        // courseId: '',
-        // numberOfClasses: '0',
-        // courseDetails: [],
+        numberOfClasses: '0',
+        yogasessionId: '',
+        retreatId: '',
+        courseId: '',
+        courseDetails: [],
     });
 
     const [scheduleData, setScheduleData] = useState([]);
@@ -42,7 +41,6 @@ const ScheduleForm = () => {
     const handleChange = async (e) => {
         const { name, value } = e.target;
 
-
         if (name.startsWith('classDate') || name.startsWith('classStartTime') || name.startsWith('classEndTime')) {
             const index = parseInt(name.match(/\d+/)[0]);
             const property = name.match(/[a-zA-Z]+/)[0];
@@ -58,16 +56,16 @@ const ScheduleForm = () => {
             setFormData(prevState => ({ ...prevState, [name]: value }));
         }
 
-        if (name === "category_type") {
-            // Clear existing schedule data
-            setScheduleData([]);
-            setOriginalScheduleData([]);
-            // Reset selected session ID
-            setFormData(prevState => ({
-                ...prevState,
-                selectedSessionId: '',
-            }));
-        }
+        // if (name === "category_type") {
+        //     // Clear existing schedule data
+        //     setScheduleData([]);
+        //     setOriginalScheduleData([]);
+        //     // Reset selected session ID
+        //     setFormData(prevState => ({
+        //         ...prevState,
+        //         selectedSessionId: '',
+        //     }));
+        // }
 
         if (name === "yoga_sessionType") {
             const updatedData = originalScheduleData.filter((elem) => {
@@ -87,6 +85,8 @@ const ScheduleForm = () => {
                     if (elem.id == value) {
                         setFormData(prevState => ({
                             ...prevState,
+                            // duration: selectedSessionId.duration,
+                            // endTime: calculateEndTime(formData.startTime, selectedSession.duration),
                             numberOfClasses: elem.numberOfClasses,
                             selectedSessionId: value,
                             classes: Array.from({ length: elem.numberOfClasses }, (_, index) => ({
@@ -135,6 +135,23 @@ const ScheduleForm = () => {
             });
     };
 
+    const calculateEndTime = (startTime, duration) => {
+        // Convert the start time to minutes
+        const [startHours, startMinutes] = startTime.split(':').map(Number);
+        const startTimeInMinutes = startHours * 60 + startMinutes;
+    
+        // Add duration to start time in minutes
+        const endTimeInMinutes = startTimeInMinutes + parseInt(duration);
+    
+        // Convert back to hours and minutes
+        const endHours = Math.floor(endTimeInMinutes / 60);
+        const endMinutes = endTimeInMinutes % 60;
+    
+        // Format the end time as "HH:mm"
+        const endTime = `${endHours.toString().padStart(2, '0')}:${endMinutes.toString().padStart(2, '0')}`;
+        return endTime;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
@@ -163,8 +180,8 @@ const ScheduleForm = () => {
             startTime: formData.startTime,
             endTime: formData.endTime,
             date: formData.date,
-            //  numberOfClasses: formData.numberOfClasses
-
+            courseId: formData.courseId ,
+            classes: formData.classes
         }
 
         axios.post("http://localhost:9091/schedule/addschedule", dataToSubmit)
@@ -240,7 +257,7 @@ const ScheduleForm = () => {
                         {scheduleData.map((category_Item) => (
                             <div key={category_Item.id}>
                                 <input type="radio" id={category_Item.id} name="selectedSessionId" value={category_Item.id} onChange={handleChange} />
-                                {formData.category_type == "yoga_session" && <label htmlFor={category_Item.id} className="ml-2">Yoga Type :-[{category_Item.activityType}] | Level:- {category_Item.level} | Capacity: {category_Item.maxCapacity} | Duration: {category_Item.duration} | Session Name: {category_Item.sessionName} </label>}
+                                {formData.category_type == "yoga_session" && <label htmlFor={category_Item.id} className="ml-2">Yoga Type :-[{category_Item.activityType}] | Level:- {category_Item.level} | Capacity: {category_Item.maxCapacity} | Duration in minutes: {category_Item.duration} | Session Name: {category_Item.sessionName} </label>}
                                 {formData.category_type == "retreat" && <label htmlFor={category_Item.id} className="ml-2">Retreat Name :-[{category_Item.retreatName}] | <span className='capitalize'>{category_Item.retreatName}</span> | Activity: <span className='capitalize'>{category_Item.activityType}</span></label>}
                                 {formData.category_type == "course" && <label htmlFor={category_Item.id} className="ml-2">Course Name :-[{category_Item.courseName}] | <span className='capitalize'>{category_Item.courseName}</span> | Number Of Classes: <span >{category_Item.numberOfClasses}</span> | Start Date: <span >{category_Item.startDate}</span> | End Date: <span >{category_Item.endDate}</span> | Location: <span >{category_Item.studio && category_Item.studio.location}</span></label>}
                             </div>
