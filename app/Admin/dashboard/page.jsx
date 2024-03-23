@@ -35,7 +35,7 @@ export default function AdminDashboard() {
             <h2 className="text-xl font-semibold mb-4">Courses</h2>
             <p>Manage courses.</p>
             <div className="text-right mt-2">
-              <a href="#" className="text-blue-500 hover:text-blue-700">Manage</a>
+              <a href="/Admin/Course" className="text-blue-500 hover:text-blue-700">Manage</a>
             </div>
           </div>
 

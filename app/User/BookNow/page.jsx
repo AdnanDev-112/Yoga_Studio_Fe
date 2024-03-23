@@ -74,7 +74,7 @@ const BookNow = () => {
             categorySubType: formData.yoga_sessionType,
         };
 
-        axios.post("http://localhost:9091/booking/addbooking",dataToSubmit)
+        axios.post("http://localhost:9091/booking/addbooking", dataToSubmit)
             .then(response => {
                 console.log(response.data);
                 setScheduleData(response.data || []);

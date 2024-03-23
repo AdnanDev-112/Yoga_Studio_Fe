@@ -15,7 +15,7 @@ const BookingListPage = () => {
 
 
    const handleBack = () => {
-      router.push('/User/mybooking');
+      router.push('/User/dashboard');
    };
 
 
@@ -56,13 +56,13 @@ const BookingListPage = () => {
                ← Back
             </span>
          </div>
-         <h1 className='text-center text-4xl text-gray-900 font-extralight dark:text-white'>Users Bookings List</h1>
+         <h1 className='text-center text-4xl text-gray-900 font-extralight :text-white'>Users Bookings List</h1>
          <br></br><br></br>
 
 
          <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 :text-gray-400">
+               <thead className="text-xs text-gray-700 uppercase bg-gray-50 :bg-gray-700 :text-gray-400">
                   <tr>
                      <th scope="col" className="text-center px-6 py-3">
                         Type Of Session
@@ -89,27 +89,27 @@ const BookingListPage = () => {
                </thead>
                <tbody>
                   {booking && booking.map((booking, index) => (
-                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                           {booking.categoryType || 'NA'}
+                     <tr key={index} className="bg-white border-b :bg-gray-800 :border-gray-700 hover:bg-gray-50 :hover:bg-gray-600">
+                        <td className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap :text-white">
+                           {booking.categoryType || 'Not Assigned'}
                         </td>
                         <td className="text-center px-6 py-4">
-                           {booking.level || 'NA'}
+                           {booking.level || 'Not Assigned'}
                         </td>
                         <td className="text-center px-6 py-4">
-                           {booking.startDate || 'NA'}
+                           {booking.startDate || 'Not Assigned'}
                         </td>
                         <td className="text-center px-6 py-4">
                            £{booking.amount || '0'}
                         </td>
                         <td className="text-center px-6 py-4">
-                           {booking.instructorName || 'NA'}
+                           {booking.instructorName || 'Not Assigned'}
                         </td>
                         <td className="text-center px-6 py-4">
-                           {booking.duration || 'NA'}
+                           {booking.duration || 'Not Assigned'}
                         </td>
                         {/* <td className="px-6 py-4 text-right">
-                           <button onClick={() => { handleDelete(index) }} className="font-medium text-red-600 dark:text-blue-500 hover:underline">
+                           <button onClick={() => { handleDelete(index) }} className="font-medium text-red-600 :text-blue-500 hover:underline">
                               Delete
                            </button>
                         </td> */}
