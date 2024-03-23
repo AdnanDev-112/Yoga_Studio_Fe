@@ -71,6 +71,7 @@ const BookNow = () => {
             clientId : clientId,
             scheduleId : formData.selectedSessionId,
             category_type : formData.category_type,
+            categorySubType: formData.yoga_sessionType,
         };
 
         axios.post("http://localhost:9091/booking/addbooking",dataToSubmit)

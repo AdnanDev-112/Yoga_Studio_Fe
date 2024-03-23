@@ -88,6 +88,15 @@ export default function AdminDashboard() {
             </div>
           </div>
 
+          {/* Waiting List */}        
+          <div className="bg-white rounded-lg shadow p-4">
+            <h2 className="text-xl font-semibold mb-4">Waiting List</h2>
+            <p>View and manage Waiting list for the classes</p>
+            <div className="text-right mt-2">
+              <Link href="/Admin/Waitinglist" className="text-blue-500 hover:text-blue-700">View</Link>
+            </div>
+          </div>
+
           
         </div>
       </div>
