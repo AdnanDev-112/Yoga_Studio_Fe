@@ -21,14 +21,13 @@ const ScheduleForm = () => {
         yogasessionId: '',
         retreatId: '',
         courseId: '',
-        courseDetails: [],
+        courseDetails: []
     });
 
     const [scheduleData, setScheduleData] = useState([]);
     const [originalScheduleData, setOriginalScheduleData] = useState([]);
 
-
-
+   
     const bookingFor = ["yoga_session", "retreat", "course"];
     const yogaSessiontypes = ["Class", "Workshop"];
 
@@ -40,6 +39,7 @@ const ScheduleForm = () => {
 
     const handleChange = async (e) => {
         const { name, value } = e.target;
+    
 
         if (name.startsWith('classDate') || name.startsWith('classStartTime') || name.startsWith('classEndTime')) {
             const index = parseInt(name.match(/\d+/)[0]);
@@ -157,18 +157,6 @@ const ScheduleForm = () => {
         console.log(formData);
 
 
-
-        // if (formData.category_type === 'course') {
-        // const dataToSubmit = {
-        //     yogaSessionId: formData.selectedSessionId,
-        //     category_type: formData.category_type,
-        //     startTime: formData.startTime,
-        //     endTime: formData.endTime,
-        //     date: formData.date,
-        //     courseId: formData.courseId ,
-        //     courseDetails: formData.courseDetails
-        // };
-
         if (!formData.selectedSessionId) {
             console.error('Selected session ID is null.');
             return; // Do not proceed with form submission
@@ -195,27 +183,7 @@ const ScheduleForm = () => {
             .catch(error => {
                 console.error('Error adding a schedule:', error);
             });
-        // }else {
-        //     const dataToSubmit = {
-        //         yogaSessionId: formData.selectedSessionId,
-        //         category_type: formData.category_type,
-        //         startTime: formData.startTime,
-        //         endTime: formData.endTime,
-        //         date: formData.date
-        //     };
-
-        //     axios.post("http://localhost:9091/schedule/addschedule", dataToSubmit)
-        //         .then(response => {
-        //             console.log(response.data);
-        //             setScheduleData(response.data || []);
-        //             setOriginalScheduleData(response.data || []);
-        //             alert('Schedule added Successfully!');
-        //             router.push('/Admin/Schedule');
-        //         })
-        //         .catch(error => {
-        //             console.error('Error adding a schedule:', error);
-        //         });
-        // }
+       
     };
 
 

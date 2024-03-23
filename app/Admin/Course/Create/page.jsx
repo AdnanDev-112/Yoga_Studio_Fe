@@ -39,7 +39,7 @@ const ScheduleForm = () => {
                 studioId: studioResponse.data[0].id
             }));
 
-            const yogaSessionResponse = await axios.get('http://localhost:9091/yogasession/getactivitytype');
+            const yogaSessionResponse = await axios.get('http://localhost:9091/yoga_session/getsessionswithrecurring');
             setYogaSessionData(yogaSessionResponse.data);
             setFormData(prevState => ({
                 ...prevState,

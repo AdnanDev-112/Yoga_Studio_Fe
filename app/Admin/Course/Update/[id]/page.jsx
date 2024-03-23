@@ -31,7 +31,7 @@ const CoursePage = () => {
                 studioId: parseInt(studioResponse.data[0].id)
             }));
 
-            const yogaSessionResponse = await axios.get('http://localhost:9091/yogasession/getactivitytype');
+            const yogaSessionResponse = await axios.get('http://localhost:9091/yoga_session/getsessionswithrecurring');
             setYogaSessionData(yogaSessionResponse.data);
             if (yogaSessionResponse.data.length > 0) { // Check if yogaSessionData is not empty
                 setFormData(prevState => ({

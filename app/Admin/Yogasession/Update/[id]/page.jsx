@@ -67,7 +67,7 @@ const YogaSessionCreate = () => {
 
 
 
-        await axios.get('http://localhost:9091/yoga_session/getoneyogasession/'+ params.id)
+        await axios.get('http://localhost:9091/yoga_session/getyogasessionbyid/'+ params.id)
             .then(response => {
                 if(response.status == 200){
                     console.log(response.data);
