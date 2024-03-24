@@ -57,7 +57,7 @@ export default function AdminDashboard() {
               <li>Revenue: ${insights.revenue}</li>
             </ul>
             <div className="text-right mt-2">
-              <a href="#" className="text-blue-500 hover:text-blue-700">More Insights</a>
+              <a href="/Admin/Studioinsights" className="text-blue-500 hover:text-blue-700">More Insights</a>
             </div>
           </div>
 
