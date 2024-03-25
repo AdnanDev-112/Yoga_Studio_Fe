@@ -18,13 +18,16 @@ export const options = {
             },
             async authorize(credentials) {
                 const adminUser = { userID: "1", userType: "admin" };
-                const normalUser = { userID: "2", userType: "user" };
+                const normalUser1 = { userID: "11", userType: "user" };
+                const normalUser2 = { userID: "12", userType: "user" }; 
 
                 try {
                     if (credentials.userID == "1") {
                         return adminUser;
-                    } else {
-                        return normalUser;
+                    } else if(credentials.userID == "11") {
+                        return normalUser1;
+                    }else{
+                        return normalUser2;
                     }
                 } catch (error) {
                     console.log(error);

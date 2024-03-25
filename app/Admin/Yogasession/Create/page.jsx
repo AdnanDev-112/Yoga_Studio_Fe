@@ -117,7 +117,7 @@ const YogaSessionCreate = () => {
 
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-100">
+        <div className="flex justify-center items-center bg-gray-100">
             <form onSubmit={handleSubmit} className="w-full max-w-lg bg-white p-8 rounded-lg shadow">
                 <div className="self-start mb-4 cursor-pointer span">
                     <span onClick={() => handleBack()} className="text-base text-blue-500 hover:text-blue-700">

@@ -2,10 +2,13 @@
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 const BookNow = () => {
     const router = useRouter();
-    const clientId = 11;
+    const { data: session, status } = useSession()
+    const [clientId, setClientId] = useState(null);
+    // const clientId = session.user.userID;
     const [formData, setFormData] = useState({
         category_type: '',
         yogaSessiontype: '',
@@ -21,6 +24,13 @@ const BookNow = () => {
 
     const bookingFor = ["yoga_session", "retreat", "course"];
     const yogaSessiontypes = ["Class", "Workshop"];
+
+
+    useEffect(() => {
+        if (status === 'authenticated') {
+            setClientId(session.user.userID);
+        }
+    }, [status, session]);
 
     useEffect(() => {
         if (formData.category_type) {

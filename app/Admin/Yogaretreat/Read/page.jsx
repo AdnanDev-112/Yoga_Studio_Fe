@@ -28,12 +28,24 @@ const YogaretreatPage = () => {
           console.error('Error:', error);
         });
   }
+  function updateImgUrls(data) {
+    const keywords = ['yoga', 'meditation', 'asana', 'yogaclass', 'yogapose', 'yogamat', 'yogastudio', 'yogateacher', 'yogapractice'];
+
+    return data.map((elem, index) => {
+      const keyword = keywords[index % keywords.length];
+      return {
+        ...elem,
+        imageUrl: `https://source.unsplash.com/800x900/?${keyword}`
+      }
+    })
+  };
 
   function getYogaRetreats() {
     axios.get('http://localhost:9091/yogaretreat/getyogaretreatlist')
       .then(response => {
         console.log(response.data);
-        setYogaRetreats(response.data);
+        const updatedUrlData = response.data.length > 0 ? updateImgUrls(response.data) : [];
+        setYogaRetreats(updatedUrlData);
       })
       .catch(error => {
         console.error('Error:', error);
@@ -54,7 +66,7 @@ const YogaretreatPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {yogaRetreats.map((retreat,index) => (
               <div key={index} className="bg-white rounded-lg shadow overflow-hidden">
-                <img src={`https://source.unsplash.com/800x900/?yogaretreat`} alt={retreat.retreatName} className="w-full h-56 object-cover object-center" />
+                <img src={retreat.imageUrl} alt={retreat.retreatName} className="w-full h-56 object-cover object-center" />
                 <div className="p-6">
                   <h2 className="text-lg font-semibold text-gray-800">{retreat.retreatName}</h2>
                   <p className="text-sm text-gray-600">Meal: {retreat.meal}</p>
