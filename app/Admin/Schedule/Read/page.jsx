@@ -31,7 +31,7 @@ const SchedulePage = () => {
     }
 
     function getData() {
-        axios.get('http://localhost:9091/schedule/getschedulelist')
+        axios.get('http://localhost:9091/schedule/getschedulelistdesc')
             .then(response => {
                 console.log(response.data);
                 setSchedule(response.data);
@@ -59,28 +59,19 @@ const SchedulePage = () => {
                                 Type Of Session
                             </th>
                             <th scope="col" className="text-center px-6 py-3">
-                                Level Type
+                                Date
                             </th>
                             <th scope="col" className="text-center px-6 py-3">
-                                Class Max Capacity
+                                Start Time
                             </th>
                             <th scope="col" className="text-center px-6 py-3">
-                                Price
+                                End Time
                             </th>
                             <th scope="col" className="text-center px-6 py-3">
-                                Duration
+                                Action
                             </th>
                             <th scope="col" className="text-center px-6 py-3">
-                                Recurring
-                            </th>
-                            <th scope="col" className="text-center px-6 py-3">
-                                Instructor
-                            </th>
-                            <th scope="col" className="text-center px-6 py-3">
-                                Manager
-                            </th>
-                            <th scope="col" className="text-center px-6 py-3">
-                                Studio
+                                Action
                             </th>
                             <th scope="col" className="text-center px-6 py-3">
                                 <span className="sr-only">Delete</span>
@@ -94,28 +85,13 @@ const SchedulePage = () => {
                                     {schedule.categoryType || 'NA'}
                                 </td>
                                 <td className="text-center px-6 py-4">
-                                    {schedule.level || 'NA'}
+                                    {schedule.date || 'NA'}
                                 </td>
                                 <td className="text-center px-6 py-4">
-                                    {schedule.maxCapacity || 'NA'}
+                                    {schedule.startTime || 'NA'}
                                 </td>
                                 <td className="text-center px-6 py-4">
-                                    £{schedule.amount || '0'}
-                                </td>
-                                <td className="text-center px-6 py-4">
-                                    {schedule.duration || 'NA'}
-                                </td>
-                                <td className="text-center px-6 py-4">
-                                    {schedule.recurring || 'NA'}
-                                </td>
-                                <td className="text-center px-6 py-4">
-                                    {schedule.instructorName || 'NA'}
-                                </td>
-                                <td className="text-center px-6 py-4">
-                                    {schedule.managerName || 'NA'}
-                                </td>
-                                <td className="text-center px-6 py-4">
-                                    {schedule.address || 'NA'}
+                                    {schedule.endTime || 'NA'}
                                 </td>
                                 <td className="px-6 py-4 text-right">
                                     <Link href={"/Admin/Schedule/Update/" + index} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">

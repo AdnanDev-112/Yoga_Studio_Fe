@@ -132,9 +132,6 @@ return (
                   </th>
                   <th scope="col" className="text-center px-6 py-3">
                      Date
-                     <span>
-                     <Image alt='Down Arrow' className='cursor-pointer' src={"/cancel-icon.png"} width={35} height={35}/>
-                     </span>
                   </th>
                   <th scope="col" className="text-center px-6 py-3">
                      Instructor
