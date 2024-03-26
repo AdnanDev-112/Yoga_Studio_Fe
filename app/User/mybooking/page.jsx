@@ -12,22 +12,13 @@ const BookingListPage = () => {
    const router = useRouter();
    const { data: session, status } = useSession()
    const [pendingListData, setPendingListData] = useState([]);
-   const [clientId, setClientId] = useState(null);
-
-   // const [clientId, setClientId] = useState(null);
-
-   // useEffect(() => {
-   //    getData(); // Pass the id value to the getData function
-   //    // console.log(session.user.userID);
-   // }, []);
-
 
    useEffect(() => {
       if (status === 'authenticated') {
-          setClientId(session.user.userID);
           getData(session.user.userID);
       }
   }, [status, session]);
+  
 
    const handleBack = () => {
       router.back();
@@ -48,26 +39,50 @@ const BookingListPage = () => {
          });
 
    }
-   // const clientId = session.user.userID;
-   function getData(id) {
-      axios.get('http://localhost:9091/pendinglist/getbyclientid/' + id)
+
+   function combineAndSortArrays(pendingList, waitingList) {
+      const updatedWaitingList = waitingList.map(item => ({
+         ...item,
+         id: Math.floor(Math.random() * 1000000), // Generate a random ID
+         confirmedStatus: false,
+         inWaiting: true
+      }));
+
+      const combinedArray = [...pendingList, ...updatedWaitingList];
+
+      const sortedArray = combinedArray.sort((a, b) => {
+         const aDate = new Date(a.bookedTime || a.addDate);
+         const bDate = new Date(b.bookedTime || b.addDate);
+
+         return bDate - aDate; // Sort in descending order
+      });
+
+      return sortedArray;
+   }
+
+
+   async function getData(id) {
+      let pendingList = [];
+      let waitingList = [];
+      await axios.get('http://localhost:9091/pendinglist/getbyclientid/' + id)
          .then(response => {
-            console.log(response.data);
             setPendingListData(response.data);
+            pendingList = response.data;
+            
          })
          .catch(error => {
             console.error('Error fetching booking data:', error);
             setPendingListData([]);
          });
-      // axios.get('http://localhost:9091/booking/getbookingdetails/' + clientId)
-      //    .then(response => {
-      //       console.log(response.data);
-      //       setPendingListData(response.data);
-      //    })
-      //    .catch(error => {
-      //       console.error('Error fetching booking data:', error);
-      //       setPendingListData([]);
-      //    });
+      await axios.get('http://localhost:9091/waitinglist/getwaitinglistbyclientid/' + id)
+         .then(response => {
+            waitingList = response.data;
+         })
+         .catch(error => {
+            console.error('Error fetching Waiting list Data data:', error); 
+         });
+         const combinedData = combineAndSortArrays(pendingList,waitingList);
+         setPendingListData(combinedData);
 
    }
 
@@ -132,6 +147,9 @@ return (
                   </th>
                   <th scope="col" className="text-center px-6 py-3">
                      Date
+                     <span>
+                     <Image alt='Down Arrow' className='cursor-pointer' src={"/down-arrow.png"} width={25} height={25}/>
+                     </span>
                   </th>
                   <th scope="col" className="text-center px-6 py-3">
                      Instructor
@@ -148,7 +166,7 @@ return (
                {pendingListData && pendingListData.map((item, index) => {
                   const booking = item.booking;
                   const itemData = objectKeyMapper(booking);
-                  console.log(itemData,"itemData");
+                  
                   
                   return (
                      <tr key={index} className="bg-white border-b :bg-gray-800 :border-gray-700 hover:bg-gray-50 :hover:bg-gray-600">
@@ -168,44 +186,15 @@ return (
                              {booking.schedule.categoryType != "course" && itemData.instructor ? itemData.instructor.instructorName || 'Not Assigned' : " "}
                              {booking.schedule.categoryType == "course" && itemData.yogaSession.instructor.instructorName}
                          </td>
-                         {/* <td className="text-center px-6 py-4">
-                         {booking.categoryType == "yoga_session" && itemData.studio ? itemData.studio.location || 'Not Assigned' : " "}
-                         {booking.categoryType == "course" && itemData.yogaSession.studio.location}
-                         {booking.categoryType == "retreat" && itemData.yogaSession.studio.location}
-                         </td> */}
                          <td className="text-center flex  justify-center px-6 py-4">
                              {item.confirmedStatus && <Image alt='Booking Confirmed' width={35} height={35} src={"/checkmark.png"} />}
-                             {!item.confirmedStatus && <Image alt='Cancel Booking' className='cursor-pointer' onClick={() => handleCancellation(item.id)} width={35} height={35} src={"/cancel-icon.png"} />}
+                             {!item.confirmedStatus && !item.inWaiting && <Image alt='Cancel Booking' className='cursor-pointer' onClick={() => handleCancellation(item.id)} width={35} height={35} src={"/cancel-icon.png"} />}
+                             {!item.confirmedStatus && item.inWaiting && <p>In Waiting</p>}
                          </td>
                      </tr>
                  )
 
-                  return (
-                  <tr key={index} className="bg-white border-b :bg-gray-800 :border-gray-700 hover:bg-gray-50 :hover:bg-gray-600">
-                     <td className=" capitalize text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap :text-white">
-                     {booking.schedule.categoryType == "yoga_session" ? verifyYogaSessiontype(booking) : booking.schedule.categoryType || 'Not Assigned' }
-                     </td> 
-                     <td className="text-center px-6 py-4">
-                     {booking.duration || 'Not Assigned session name'}
-                     </td>
-                      <td className="text-center px-6 py-4">
-                        £{displayPricing(booking) || '0'}
-                     </td>
-                     <td className="text-center px-6 py-4">
-                     {booking.schedule.date || 'Not Assigned'}
-                     </td>
-                     <td className="text-center px-6 py-4">
-                        {itemData && itemData.instructor ? itemData.instructor.instructorName || 'Not Assigned' : " "}
-                     </td>
-                     <td className="text-center px-6 py-4">
-                        {"Studio Loc"}
-                     </td>
-                     <td className="text-center flex  justify-center px-6 py-4">
-                     {item.confirmedStatus && <Image alt='Booking Confirmed'  width={35} height={35} src={"/checkmark.png"}/>} 
-                     {!item.confirmedStatus && <Image alt='Cancel Booking' className='cursor-pointer' onClick={()=>handleCancellation(item.id)}  width={35} height={35} src={"/cancel-icon.png"}/>} 
-                     </td> 
-                  </tr>
-               )}
+                     }
                )}   
             </tbody>
          </table>
@@ -215,76 +204,3 @@ return (
 
 };
 export default BookingListPage;
-
-// "use client";
-// import { useRouter, useParams } from 'next/navigation';
-// import axios from 'axios';
-// import { useEffect, useState } from 'react';
-
-
-// const BookingListPage = () => {
-//   // const params = useParams();
-//    const router = useRouter();
-//    const [booking, setBooking] = useState([]);
-
-//    useEffect(() => {
-//       getData();
-//    }, []);
-
-
-//    const handleBack = () => {
-//       router.push('/User/dashboard');
-//    };
-
-//    function getData() {
-// axios.get('http://localhost:9091/booking/getbookingdetails/' + 11)
-//          .then(response => {
-//             console.log(response.data);
-//             setBooking(response.data);
-//          })
-//          .catch(error => {
-//             console.error('Error fetching booking data:', error);
-//             setBooking([]);
-//          });
-
-//    }
-
-//    return (
-//       <div className="booking-list">
-//          <div className="self-start mb-4 cursor-pointer span">
-//             <span onClick={() => handleBack()} className="text-base text-blue-500 hover:text-blue-700">
-//                ← Back
-//             </span>
-//          </div>
-//          <h1 className='text-center text-4xl text-gray-900 font-extralight :text-white'>Users Bookings List</h1>
-//          <br></br><br></br>
-//          <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-//             <table className="w-full text-sm text-left rtl:text-right text-gray-500 :text-gray-400">
-//                <thead className="text-xs text-gray-700 uppercase bg-gray-50 :bg-gray-700 :text-gray-400">
-//                   <tr><th scope="col" className="text-center px-6 py-3">Type Of Session</th>
-//                      <th scope="col" className="text-center px-6 py-3">Level Type</th>
-//                      <th scope="col" className="text-center px-6 py-3">Start Date</th>
-//                      <th scope="col" className="text-center px-6 py-3">Price</th>
-//                      <th scope="col" className="text-center px-6 py-3">Instructor</th>
-//                      <th scope="col" className="text-center px-6 py-3">Duration</th>
-//                      <th scope="col" className="text-center px-6 py-3"><span className="sr-only">Delete</span></th>
-//                   </tr>
-//                </thead>
-//                <tbody>{booking && booking.map((booking, index) => (
-//                   <tr key={index} className="bg-white border-b :bg-gray-800 :border-gray-700 hover:bg-gray-50 :hover:bg-gray-600">
-//                      <td className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap :text-white">{booking.categoryType || 'Not Assigned'}</td>
-//                      <td className="text-center px-6 py-4">{booking.level || 'Not Assigned'}</td>
-//                      <td className="text-center px-6 py-4">{booking.startDate || 'Not Assigned'}</td>
-//                      <td className="text-center px-6 py-4">£{booking.amount || '0'}</td>
-//                      <td className="text-center px-6 py-4">{booking.instructorName || 'Not Assigned'}</td>
-//                      <td className="text-center px-6 py-4">{booking.duration || 'Not Assigned'}</td>
-//                   </tr>))}
-//                </tbody>
-//             </table>
-//          </div>
-//       </div>
-//    );
-// };
-
-
-// export default BookingListPage;

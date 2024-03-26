@@ -72,12 +72,12 @@ const WaitinglistManagement = () => {
                         const currentCapacity = data.currentCapacity;
 
                         return (
-                            <>
+                        
                                 <div key={index} className="border-2 border-black border-t-0 border-x-0 rounded-lg p-4 shadow-md">
                                     <h2 className="text-center text-xl text-gray-900 font-light">{data.className} - {formattedDate} | Max Capacity: {maxCapacity} | Current Capacity: {currentCapacity}</h2>
                                     <WaitingListAccordian title={""} items={data.items} />
                                 </div>
-                            </>
+                            
                         )
                     }
 
