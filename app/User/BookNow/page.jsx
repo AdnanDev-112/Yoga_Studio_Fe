@@ -78,9 +78,9 @@ const BookNow = () => {
     };
     const submitData = () => {
         const dataToSubmit = {
-            clientId : clientId,
-            scheduleId : formData.selectedSessionId,
-            category_type : formData.category_type,
+            clientId: clientId,
+            scheduleId: formData.selectedSessionId,
+            category_type: formData.category_type,
             categorySubType: formData.yoga_sessionType,
         };
 
@@ -156,8 +156,29 @@ const BookNow = () => {
                     </span>
                 </div>
                 <h1>Book Now</h1>
+                <h3>
+                <ul className="my-6 text-lg">
+                    <li>
+                        <strong>Yoga Session:</strong> A single class where you practice yoga. This can range from beginner to advanced levels.
+                        <ul style={{ paddingLeft: '20px' }}>
+                            <li><strong>Class:</strong> A regular yoga session, typically lasting between 60 to 90 minutes and recurring.</li>
+                            <li><strong>Workshop:</strong> A longer session that focuses on a specific aspect of yoga, such as a particular pose or technique and organised once a while</li>
+                        </ul>
+                    </li>
+                        <li><strong>Course:</strong> A series of classes that are designed to be taken together, often with a specific focus or goal.</li>
+                        <li><strong>Retreat:</strong> An event where you immerse yourself in yoga practice.</li>
+                    </ul>
 
-                <div className="mb-6">
+                    <div className='my-2'>
+                        Please select the category you want to book and then select the session you want to book.
+                    </div>
+                    
+                </h3>
+
+
+                
+
+                <div className="my-6 mb-6">
                     <label htmlFor="category_type" className="block mb-2 text-sm font-medium text-gray-900">Category</label>
                     <select id="category_type" name="category_type" value={formData.category_type} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 capitalize" required>
                         <option value="">Select an option</option>
@@ -180,9 +201,9 @@ const BookNow = () => {
                         {scheduleData.map((category_Item) => (
                             <div key={category_Item.id}>
                                 <input type="radio" id={category_Item.id} name="selectedSessionId" value={category_Item.id} onChange={handleChange} />
-                                {category_Item.categoryType == "yoga_session" && <label htmlFor={category_Item.id} className="ml-2">Date :-[{category_Item.date}] | Timing:- {category_Item.startTime} - {category_Item.endTime} | Type: {category_Item.yogaSession.activityType} | Level: {category_Item.yogaSession.level}</label>}
-                                {category_Item.categoryType == "retreat" && <label htmlFor={category_Item.id} className="ml-2">Date :-[{category_Item.date}] | Timing:- {category_Item.startTime} - {category_Item.endTime} | <span className='capitalize'>{category_Item.retreat.retreatName}</span> | Actiivity: <span className='capitalize'>{category_Item.retreat.activityType}</span>  | Meal: {category_Item.retreat.meal}</label>}
-                                {category_Item.categoryType == "course" && <label htmlFor={category_Item.id} className="ml-2">Date :-[{category_Item.date}] | Timing:- {category_Item.startTime} - {category_Item.endTime} | <span className='capitalize'>{category_Item.course.courseName}</span> | Number Of Classes: <span >{category_Item.course.numberOfClasses}</span></label>}
+                                {category_Item.categoryType == "yoga_session" && <label htmlFor={category_Item.id} className="ml-2">Name:- <span className='capitalize'>{category_Item.yogaSession.sessionName}</span> | Date :-[{category_Item.date}] | Timing:- {category_Item.startTime} - {category_Item.endTime} | Type: {category_Item.yogaSession.activityType} | Level: {category_Item.yogaSession.level}</label>}
+                                {category_Item.categoryType == "retreat" && <label htmlFor={category_Item.id} className="ml-2">Name:- <span className='capitalize'>{category_Item.retreat.retreatName}</span> | Date :-[{category_Item.date}] | Timing:- {category_Item.startTime} - {category_Item.endTime} | Actiivity: <span className='capitalize'>{category_Item.retreat.activityType}</span>  | Meal: {category_Item.retreat.meal}</label>}
+                                {category_Item.categoryType == "course" && <label htmlFor={category_Item.id} className="ml-2">Name:- <span className='capitalize'>{category_Item.course.courseName}</span> | Date :-[{category_Item.date}] | Timing:- {category_Item.startTime} - {category_Item.endTime} | Number Of Classes: <span >{category_Item.course.numberOfClasses}</span></label>}
                             </div>
                         ))}
                     </div>

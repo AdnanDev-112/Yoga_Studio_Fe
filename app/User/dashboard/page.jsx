@@ -96,7 +96,7 @@ const UserDashboard = async () => {
             title="My Bookings" 
             description="Review your upcoming and past bookings to keep track of your progress."
             buttonText="View Bookings"
-            buttonLink="/User/mybooking"
+            buttonLink="/User/Mybooking"
           />
 
           <DashboardCard 

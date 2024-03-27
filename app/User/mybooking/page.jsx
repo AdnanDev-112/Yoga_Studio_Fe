@@ -186,11 +186,21 @@ return (
                              {booking.schedule.categoryType != "course" && itemData.instructor ? itemData.instructor.instructorName || 'Not Assigned' : " "}
                              {booking.schedule.categoryType == "course" && itemData.yogaSession.instructor.instructorName}
                          </td>
-                         <td className="text-center flex  justify-center px-6 py-4">
-                             {item.confirmedStatus && <Image alt='Booking Confirmed' width={35} height={35} src={"/checkmark.png"} />}
-                             {!item.confirmedStatus && !item.inWaiting && <Image alt='Cancel Booking' className='cursor-pointer' onClick={() => handleCancellation(item.id)} width={35} height={35} src={"/cancel-icon.png"} />}
-                             {!item.confirmedStatus && item.inWaiting && <p>In Waiting</p>}
-                         </td>
+                         <td className="text-center flex justify-center items-center px-6 py-4">
+                           {item.confirmedStatus && 
+                              <div className='flex flex-col items-center'> 
+                                 <Image alt='Booking Confirmed' width={35} height={35} src={"/checkmark.png"} />
+                                 <span>Confirmed</span>
+                              </div>
+                           }
+                           {!item.confirmedStatus && !item.inWaiting && 
+                              <div className="flex flex-col items-center">
+                                 <Image alt='Cancel Booking' title='Cancel Booking' className='cursor-pointer' onClick={() => handleCancellation(item.id)} width={35} height={35} src={"/cancel-icon.png"} />
+                                 <span>Cancel</span>
+                              </div> 
+                           }
+                           {!item.confirmedStatus && item.inWaiting && <p>In Waiting</p>}
+                        </td>
                      </tr>
                  )
 

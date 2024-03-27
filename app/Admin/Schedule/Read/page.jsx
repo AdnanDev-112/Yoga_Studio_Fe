@@ -48,7 +48,7 @@ const SchedulePage = () => {
                     ← Back
                 </span>
             </div>
-            <h1 className='text-center text-4xl text-gray-900 font-extralight dark:text-white'>Studio Sessions List</h1>
+            <h1 className='text-center text-4xl text-gray-900 font-extralight dark:text-black'>Studio Sessions List</h1>
             <br></br><br></br>
 
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

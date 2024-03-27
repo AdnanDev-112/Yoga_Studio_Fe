@@ -17,14 +17,14 @@ export const options = {
                 },
             },
             async authorize(credentials) {
-                const adminUser = { userID: "1", userType: "admin" };
-                const normalUser1 = { userID: "11", userType: "user" };
-                const normalUser2 = { userID: "12", userType: "user" }; 
+                const adminUser = { userID: "0", userType: "admin" };
+                const normalUser1 = { userID: "1", userType: "user" };
+                const normalUser2 = { userID: "2", userType: "user" }; 
 
                 try {
-                    if (credentials.userID == "1") {
+                    if (credentials.userID == "0") {
                         return adminUser;
-                    } else if(credentials.userID == "11") {
+                    } else if(credentials.userID == "1") {
                         return normalUser1;
                     }else{
                         return normalUser2;
