@@ -41,6 +41,10 @@ const SchedulePage = () => {
             });
     }
 
+    function verifyYogaSessiontype(item) {
+        return item.yogaSession.recurring ? "Class" : "Workshop";
+    }
+
     return (
         <div className="schedule-list">
             <div className="self-start mb-4 cursor-pointer span">
@@ -59,6 +63,9 @@ const SchedulePage = () => {
                                 Type Of Session
                             </th>
                             <th scope="col" className="text-center px-6 py-3">
+                                Session Name
+                            </th>
+                            <th scope="col" className="text-center px-6 py-3">
                                 Date
                             </th>
                             <th scope="col" className="text-center px-6 py-3">
@@ -70,19 +77,17 @@ const SchedulePage = () => {
                             <th scope="col" className="text-center px-6 py-3">
                                 Action
                             </th>
-                            <th scope="col" className="text-center px-6 py-3">
-                                Action
-                            </th>
-                            <th scope="col" className="text-center px-6 py-3">
-                                <span className="sr-only">Delete</span>
-                            </th>
+
                         </tr>
                     </thead>
                     <tbody>
                         {schedule && schedule.map((schedule, index) => (
                             <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {schedule.categoryType || 'NA'}
+                                    {schedule.categoryType == "yoga_session" ? verifyYogaSessiontype(schedule) : schedule.categoryType || 'Not Assigned'}
+                                </td>
+                                <td className="text-center px-6 py-4">
+                                    {schedule.yogaSession ? schedule.yogaSession.sessionName : (schedule.retreat ? schedule.retreat.retreatName : (schedule.course ? schedule.course.courseName : ''))}
                                 </td>
                                 <td className="text-center px-6 py-4">
                                     {schedule.date || 'NA'}
@@ -93,15 +98,10 @@ const SchedulePage = () => {
                                 <td className="text-center px-6 py-4">
                                     {schedule.endTime || 'NA'}
                                 </td>
-                                <td className="px-6 py-4 text-right">
+                                <td className="px-6 py-4 text-center">
                                     <Link href={"/Admin/Schedule/Update/" + index} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                         Update
                                     </Link>
-                                </td>
-                                <td className="px-6 py-4 text-right">
-                                    <button onClick={() => { handleDelete(index) }} className="font-medium text-red-600 dark:text-blue-500 hover:underline">
-                                        Delete
-                                    </button>
                                 </td>
                             </tr>
                         ))}
